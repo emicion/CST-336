@@ -1,0 +1,54 @@
+.body {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom: 0;
+}
+
+.background img {
+    height: 100%;
+    width: 100%;
+}
+
+.modal {
+    position: fixed;
+    top: 30%;
+    left: 20%;
+    width: 60%;
+    height: auto;
+    background-color: rgba(0,0,0,0.65);
+    color: white;
+}
+
+.modal h1 {
+    text-align: center;
+    font-size: 36pt;
+}
+
+.modal_row {
+    display: block;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.modal_item {
+    padding-left: 20px;
+    text-align: right;
+    display: inline;
+    font-size: 16pt;
+    width: 50%;
+}
+
+.modal_row:hover {
+    background-color: rgba(0,0,300,0.4);
+}

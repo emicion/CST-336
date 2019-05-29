@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Lab 6</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" type="text/css" href="../black_blue.css"/>
+   <!--*************jQuery MAKE SURE YOU HAVE IT************-->
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <style>
+       img { width: 100px; cursor: pointer; border: solid #0099cc}
+  </style>
+</head>
+
+<body>
+  <div>
+ <!--*************STEP 1 ************-->
+ <h2>Vocabulary Quiz</h2>
+
+  <div id="q1">
+      <h3>1. Click on "El Pollo"</h3>
+      <img id="cat" src="img/cat.png" >
+      <img id="dog" src="img/dog.png" >
+      <img id="chicken" src="img/chicken.png" >
+      <img id="mouse" src="img/mouse.png" >
+  </div>
+
+ <!--*************STEP 3 ************-->
+  <h3>2. What is cat in Spanish</h3>
+  <input type="text" id="q2" />
+
+  <!--*************STEP 4 ************-->
+  <h3>3. What is dog in Spanish</h3>
+  <input type="radio" name="q3" value="cat"> Gato <br />
+  <input type="radio" name="q3" value="dog"> Perro <br />
+  <input type="radio" name="q3" value="chicken"> Pollo <br />
+  <input type="radio" name="q3" value="mouse"> Raton <br />
+
+  <h3>4. What is mouse in Spanish</h3>
+  <input type="text" id="q4" />
+
+  <h3>5. What is tortuga in English</h3>
+  <input type="radio" name="q5" value="tortuga"> Turtle <br />
+  <input type="radio" name="q5" value="elefante"> Elephant <br />
+  <input type="radio" name="q5" value="pescado"> Fish <br />
+  <input type="radio" name="q5" value="zapato"> Shoe <br />
+
+  <br /><br />
+ <!--*************STEP 5 ************-->
+  <input type="button" value="Submit Quiz!" id="submitQuiz" />
+
+
+  <h2 id="grade"></h2>
+
+
+  </div>
+
+  <script>
+      <!--*************STEP 2 ************-->
+      var answer1;
+      $("#q1 img").mouseenter( function(){    $(this).css("width","125px")     }  );
+
+      $("#q1 img").mouseleave( function(){    $(this).css("width","100px")     }  );
+
+      $("#q1 img").click( function(){
+
+          $("#q1 img").css("border","");
+          $(this).css("border","5px solid green")
+          //alert( $(this).attr("id") );
+          answer1 = $(this).attr("id");
+
+       });
+
+      <!--*************STEP 6 ************-->
+      $("#submitQuiz").click( function(){
+          var grade = 0;
+
+          if (answer1 == "chicken") {
+              grade = 20;
+          }
+
+          var answer2 = $("#q2").val().toUpperCase();
+          if (answer2 == "GATO") {
+              grade += 20;
+          }
+
+          var answer3 = $('input[name="q3"]:checked').val();
+          if (answer3 == "dog") {
+               grade += 20;
+          }
+
+          var answer4 = $("#q4").val().toUpperCase();
+          if (answer4 == "RATON" || answer4 == "RATÓN") {
+              grade += 20;
+          }
+
+          var answer5 = $('input[name="q5"]:checked').val();
+          if (answer5 == "tortuga") {
+               grade += 20;
+          }
+
+          $("#grade").html("Grade: "  + grade);
+
+      }  );
+
+
+
+  </script>
+
+</body>
+</html>

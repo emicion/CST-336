@@ -1,0 +1,32 @@
+.modal_background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    visibility: hidden;
+}
+
+.modal {
+    position: absolute;
+    background-color: white;
+    color: black;
+    top: 30%;
+    left: 20%;
+    width: 60%;
+    height: auto;
+}
+
+#infoButton {
+    background: lightgray;
+    padding: 5px 5px 5px 5px;
+    margin-bottom: 15px;
+    width: 100px;
+    border: groove;
+}
+
+#infoButton:hover {
+    cursor: pointer;
+    background-color: lightblue;
+}

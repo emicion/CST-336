@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Assignment 7</title>
+  <meta name="description" content="">
+  <meta name="author" content="Christopher Calderon">
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+  <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../black_blue.css" />
+  <script>
+$(document).ready(function(){
+    $("#rentButton").click(function(){
+        alert("Thank you for your selection! The movie is on the way and you will be billed $0.99 per day.");
+    });
+});
+
+</script>
+</head>
+<body>
+  <h3>New Membership Form</h3>
+  <form>
+    First Name: <input type="text" id="firstName" name="firstName" /> <br /><br />
+    Last Name: <input type="text" name="lastName" /> <br /><br />
+    Addreess: <input type="text" name="address" /> <br /><br />
+    Zipcode: <input type="text" id="zipCode" name="zipCode" size="5" /> <br /><br />
+    City: <span id="city"></span><br /><br />
+    Email: <input type="text" name="email" /> <br /><br />
+    <span id="welcome" name="welcome"><span>
+      <button id="registerButton">Register</button>
+     </form>
+
+<div id="searchMovie" style="display:none">
+     <h3 id="header">Please Search for a Movie </h3>
+     <form>
+       Movie: <input type="text" id="title" name="title" /><span id="checkMovie"></span> <br /><br />
+       <button id="rentButton">Rent Movie</button>
+     </form>
+</div>
+<br /><br />
+(Movies in database include Alien, Oldboy, and Donnie Darko. Please try both movies that are in and not in the database for testing purposes.)
+     <script>
+
+     $(document).ready(function(){
+         $("#registerButton").click(function(){
+             $('#searchMovie').removeAttr("style");
+             $("#header").append($("#firstName").val());
+             $('#rentButton').hide();
+             return false;
+         });
+
+     });
+
+     $("#zipCode").change(  function(){
+             //alert(  $("#zipCode").val()      );
+
+              $.ajax({
+            type: "get",
+             url: "zip.php",
+        dataType: "json",
+            data: { "zip_code": $("#zipCode").val() },
+            success: function(data,status) {
+                 //alert(data["city"]);
+                 $("#city").html(data["city"]);
+              },
+              complete: function(data,status) { //optional, used for debugging purposes
+                  //alert(status);
+              }
+         });
+
+
+         } ); //end changeEvent
+
+     $("#title").change( function(){
+
+
+                $.ajax({
+              type: "post",
+               url: "movieLookup.php",
+              dataType: "json",
+              data: { "title": $("#title").val() },
+              success: function(data,status) {
+
+                 //alert(data['exists']);
+               if (data['exists'] == "true")  {
+                 $("#checkMovie").html("That movie is available!");
+                 $("#checkMovie").css("color","#0099cc");
+                 $("#title").css("background-color","#0099cc");
+                 $('#rentButton').show();
+                 $("#title").focus();
+
+
+
+               } else {
+
+                  $("#checkMovie").html("Sorry, we don't have that movie.");
+                  $("#checkMovie").css("color","");
+                  $("#title").css("background-color","red");
+                  $('#rentButton').hide();
+
+               }
+
+
+
+              },
+              complete: function(data,status) { //optional, used for debugging purposes
+                  //alert(status);
+              }
+         });
+
+             } );
+
+  </script>
+</body>
+</html>
